@@ -1,0 +1,6 @@
+div[data-role="webcams"] img{
+    width: 100%
+}
+div[data-role="webcams"] p{
+  margin-top: 0;
+}
