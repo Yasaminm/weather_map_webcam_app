@@ -30,9 +30,48 @@
   var $selectUnits = $('input[name="units"]');
   
   var $selectCities = $('select[name="countries"]');
+  ///////////////////////////////////////////////////////////////////
+ 
+    $( "#autocomplete" ).on( "filterablebeforefilter", function ( e, data ) {
+    console.log(data);
+        var $ul = $( this ),
+            $input = $( data.input ),
+            value = $input.val(),
+            html = "";
+        $ul.html( "" );
+        if ( value && value.length > 2 ) {
+            $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
+            $ul.listview( "refresh" );
+            $.ajax({
+                url: "http://gd.geobytes.com/AutoCompleteCity",
+                dataType: "jsonp",
+                crossDomain: true,
+                data: {
+                    q: $input.val()
+                }
+            })
+            .then( function ( response ) {
+                $.each( response, function ( i, val ) {
+                console.log(val);
+                html += "<li>" + val + "</li>";
+                });
+                $ul.html( html );
+                $ul.listview( "refresh" );
+                $ul.trigger( "updatelayout");
+                $('li').on('click', selectedOption);
+
+//     
+            });
+
+        }
+
+    });
+
+  
+  /////////////////////////////////////////////////////////////////////
   
   
-  $selectCities.change(selectedOption);
+//  $selectCities.change(selectedOption);
   
   $selectLang.click(function(){
       options.lang = $(this).val();
@@ -68,11 +107,14 @@
   
   
   function selectedOption(){
-      options.city = $(this).val();
+      options.city = $(this).html();
+//      console.log($(this).html());
       if (options.city === ' ')
           return false;
       localStorage.setItem('city', $(this).val());
       $weatherBox.html(null);
+     $('li').remove();
+     $('#autocomplete-input').val($(this).html());
       getWeather();
   };
   
@@ -184,7 +226,7 @@ days[5] = "Frei";
 days[6] = "Sams";
 
 //var n = weekday[d.getDay()];
-      console.log(time.day);
+//      console.log(time.day);
       $('<p>').text( days[d.getDay()]+ ' ' +time.h +':'+time.i).appendTo($('[data-realtime]'));
   };
 
