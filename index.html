@@ -69,20 +69,46 @@
     </form>
     
         </div>
-                <div class="ui-grid-a">
-                <div data-role='selectCountries' class="ui-block-a" style="width: 70%">
-                    <select id='countries' name="countries" data-native-menu="true"> 
-                    </select>
-                </div>
-               <!-- <div data-role="fahrn-grad" class="ui-block-b" style="width: 20%">
-                    <select name="slider-flip-m" id="slider-flip-m" data-role="slider">
-                        <option name="fc" value="imperial">F°</option>
-                        <option name="fc" value="metric" selected="">C°</option>
-                    </select>
-                </div> -->
-                </div>
-                <hr>
+                
+        <form class="ui-filterable">
+            <input id="autocomplete-input" data-role="listview"  data-inset="true" data-filter="true" data-input="#autocomplete-input" data-type="search" placeholder="Bette eine Stad auswählen ...">
+        </form>
+        <ul id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-input="#autocomplete-input"></ul>
+
+
+
+<hr>
                 <div data-role='weather'></div>
+                <!-- Options -->
+                
+                
+                <select name="select-native-2" id="select-native-2">
+                    <option value="small">Choices</option>
+                    <option id="forecast" value="small">Forecast</option>
+                    <option id="webcamphotos" value="medium">Webcam</option>
+                    <option id="showmap" value="large">Map</option>
+                </select>
+                <!--       -->
+                <div data-role="fweather">
+                    <!--    Options    -->
+             
+    <div data-role="collapsibleset"  data-inset="true" id="collapsiblesetForFilter" data-input="#searchForCollapsibleSet">
+        <div data-role="collapsible" data-filtertext="Animals">
+            <h3>Morgen</h3>
+            <div id="firstday"></div>
+        </div>
+        <div data-role="collapsible" data-filtertext="Cars">
+            <h3>Uber Morgen</h3>
+            <div id="secondday"></div>
+        </div>
+        <div data-role="collapsible" data-filtertext="Planets">
+            <h3>Uber Uber Morgen</h3>
+            <div id="thirdday"></div>
+        </div>
+    </div>
+
+                <!--    Options    -->
+                </div>
                 <div data-role="webcams"></div>
 
             </div>
